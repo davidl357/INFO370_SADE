@@ -10,14 +10,17 @@ listings <- select(listings.data, id, name, summary, space, description, neighbo
 # gets only the listings that have a rating of 80 or above
 target.listings <- filter(listings, listings$review_scores_rating >= "80")
 
+# graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
                       geom_bar(mapping = aes(x = review_scores_rating, color = "black", fill = "blue")) +
                       ggtitle("Total Number of Reviews Above 80") +
                       labs(x = "Review Scores", y = "Count") +
                       theme(legend.position = "none")
 
+# average for ratings 80 and above
 ratings.mean <- mean(target.listings$review_scores_rating)
 
+# graph of cleaniness among the listings above 80 rating
 cleanliness <- ggplot(data = target.listings) +
                       geom_bar(mapping = aes(x = review_scores_cleanliness, color = "black", fill = "blue")) +
                       ggtitle("Cleanliness Rating based on Reviews for Listings Rated 80 or Above") +
@@ -25,6 +28,7 @@ cleanliness <- ggplot(data = target.listings) +
                       theme(legend.position = "none")
 
 plot(rating.graph)
+
 plot(cleanliness)
 
 reviews.data <- read.csv('reviews.csv', stringsAsFactors = FALSE)
