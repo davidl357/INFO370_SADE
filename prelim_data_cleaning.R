@@ -15,14 +15,18 @@ rating.graph <- ggplot(data = target.listings) +
                       ggtitle("Total Number of Reviews Above 80") +
                       labs(x = "Review Scores", y = "Count") +
                       theme(legend.position = "none")
-plot(rating.graph)
 
-rating.price <- ggplot(data = target.listings) + 
-                      geom_point(mapping = aes(x = review_scores_rating, y = price)) +
-                      ggtitle("Review Scores and Price") +
-                      labs(x = "Review Scores", y = "Price") +
+ratings.mean <- mean(target.listings$review_scores_rating)
+
+cleanliness <- ggplot(data = target.listings) +
+                      geom_bar(mapping = aes(x = review_scores_cleanliness, color = "black", fill = "blue")) +
+                      ggtitle("Cleanliness Rating based on Reviews for Listings Rated 80 or Above") +
+                      labs(x = "Cleaniless Score (out of 10)") +
                       theme(legend.position = "none")
-  
-plot(rating.price)
+
+plot(rating.graph)
+plot(cleanliness)
 
 reviews.data <- read.csv('reviews.csv', stringsAsFactors = FALSE)
+
+reviews <- select(reviews.data, id, reviewer_id, comments)
