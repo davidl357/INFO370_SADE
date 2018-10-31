@@ -27,9 +27,17 @@ cleanliness <- ggplot(data = target.listings) +
                       labs(x = "Cleaniless Score (out of 10)") +
                       theme(legend.position = "none")
 
+# graph of the correlation between listing score and number of reviews
+num.reviews <- ggplot(data = target.listings) +
+                      geom_point(mapping = aes(y = review_scores_rating, x = number_of_reviews, color = review_scores_rating)) +
+                      ggtitle("Number of Reviews to Review Rating for Ratings 80 and Up") +
+                      labs(y = "Listing Rating", x  = "Number of Reviews")
+
 plot(rating.graph)
 
 plot(cleanliness)
+
+plot(num.reviews)
 
 reviews.data <- read.csv('reviews.csv', stringsAsFactors = FALSE)
 
