@@ -1,6 +1,7 @@
 library(dplyr)
 library(ggplot2)
 
+
 # reads in the listings.csv gathered from the Kaggle Seattle Airbnb Open Data (https://www.kaggle.com/airbnb/seattle)
 listings.data <- read.csv('listings.csv', stringsAsFactors = FALSE)
 
@@ -19,6 +20,18 @@ rating.graph <- ggplot(data = target.listings) +
 
 # average for ratings 80 and above
 ratings.mean <- mean(target.listings$review_scores_rating)
+
+# median for ratings 80 and above
+ratings.median <- median(target.listings$review_scores_rating)
+
+# function to find mode
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# mode for ratings 80 and above
+ratings.mode <- getmode(target.listings$review_scores_rating)
 
 # graph of cleaniness among the listings above 80 rating
 cleanliness <- ggplot(data = target.listings) +
