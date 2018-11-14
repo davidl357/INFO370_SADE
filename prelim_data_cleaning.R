@@ -33,6 +33,7 @@ num.reviews <- ggplot(data = target.listings) +
                       ggtitle("Number of Reviews to Review Rating for Ratings 80 and Up") +
                       labs(y = "Listing Rating", x  = "Number of Reviews")
 
+# initial plots
 plot(rating.graph)
 
 plot(cleanliness)
