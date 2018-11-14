@@ -1,7 +1,6 @@
 library(dplyr)
 library(ggplot2)
 
-
 # reads in the listings.csv gathered from the Kaggle Seattle Airbnb Open Data (https://www.kaggle.com/airbnb/seattle)
 listings.data <- read.csv('listings.csv', stringsAsFactors = FALSE)
 
@@ -21,18 +20,6 @@ rating.graph <- ggplot(data = target.listings) +
 # average for ratings 80 and above
 ratings.mean <- mean(target.listings$review_scores_rating)
 
-# median for ratings 80 and above
-ratings.median <- median(target.listings$review_scores_rating)
-
-# function to find mode
-getmode <- function(v) {
-  uniqv <- unique(v)
-  uniqv[which.max(tabulate(match(v, uniqv)))]
-}
-
-# mode for ratings 80 and above
-ratings.mode <- getmode(target.listings$review_scores_rating)
-
 # graph of cleaniness among the listings above 80 rating
 cleanliness <- ggplot(data = target.listings) +
                       geom_bar(mapping = aes(x = review_scores_cleanliness, color = "black", fill = "blue")) +
@@ -51,6 +38,8 @@ plot(rating.graph)
 plot(cleanliness)
 
 plot(num.reviews)
+
+# accomdates, bathrooms, bedrooms,bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
 
 reviews.data <- read.csv('reviews.csv', stringsAsFactors = FALSE)
 
