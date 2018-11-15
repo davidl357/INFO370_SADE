@@ -17,8 +17,7 @@ rating.graph <- ggplot(data = target.listings) +
                       labs(x = "Review Scores", y = "Count") +
                       theme(legend.position = "none")
 
-# average for ratings 80 and above
-ratings.mean <- mean(target.listings$review_scores_rating)
+plot(rating.graph)
 
 # graph of cleaniness among the listings above 80 rating
 cleanliness <- ggplot(data = target.listings) +
@@ -27,21 +26,27 @@ cleanliness <- ggplot(data = target.listings) +
                       labs(x = "Cleaniless Score (out of 10)") +
                       theme(legend.position = "none")
 
+plot(cleanliness)
+
 # graph of the correlation between listing score and number of reviews
 num.reviews <- ggplot(data = target.listings) +
                       geom_point(mapping = aes(y = review_scores_rating, x = number_of_reviews, color = review_scores_rating)) +
                       ggtitle("Number of Reviews to Review Rating for Ratings 80 and Up") +
                       labs(y = "Listing Rating", x  = "Number of Reviews")
 
-# initial plots
-plot(rating.graph)
-
-plot(cleanliness)
-
 plot(num.reviews)
 
+
+# descriptive Statistics
 # accomdates, bathrooms, bedrooms,bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
 
-reviews.data <- read.csv('reviews.csv', stringsAsFactors = FALSE)
+# gets the minimum rating for all listings
+ratings.min <- min(na.omit(listings$review_scores_rating))
 
-reviews <- select(reviews.data, id, reviewer_id, comments)
+# gets the maximum rating for all listings
+ratings.max <- max(na.omit(listings$review_scores_rating))
+
+# average for ratings 80 and above
+ratings.mean <- round(mean(na.omit(listings$review_scores_rating)), 2)
+
+ratings.median <- median(na.omit(listings$review_scores_rating))
