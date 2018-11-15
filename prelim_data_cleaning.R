@@ -38,7 +38,19 @@ plot(num.reviews)
 
 
 # descriptive Statistics
-# accomdates, bathrooms, bedrooms,bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
+# accomdates, bathrooms, bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
+
+# gets the min number of accommodates for listings 80 rating and up
+accomdates.min <- min(na.omit(target.listings$accommodates))
+
+# gets the maximum number of accommodates for listings 80 rating and up
+accomdates.max <- max(na.omit(target.listings$accommodates))
+
+# average number of accommodates for listings 80 rating and up
+accomdates.mean <- round(mean(na.omit(target.listings$accommodates)), 2)
+
+# median number of accommodates for listings 80 rating and up
+accomdates.median <- median(na.omit(target.listings$accommodates))
 
 # gets the minimum rating for all listings
 ratings.min <- min(na.omit(listings$review_scores_rating))
@@ -46,7 +58,9 @@ ratings.min <- min(na.omit(listings$review_scores_rating))
 # gets the maximum rating for all listings
 ratings.max <- max(na.omit(listings$review_scores_rating))
 
-# average for ratings 80 and above
+# average rating for all listings
 ratings.mean <- round(mean(na.omit(listings$review_scores_rating)), 2)
 
+# median for all listings
 ratings.median <- median(na.omit(listings$review_scores_rating))
+
