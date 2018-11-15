@@ -28,3 +28,7 @@ num.reviews <- ggplot(data = target.listings) +
   labs(y = "Listing Rating", x  = "Number of Reviews")
 
 plot(num.reviews)
+
+# linear regression rating vs. price
+# linear regression rating vs. location
+
