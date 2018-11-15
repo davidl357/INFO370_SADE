@@ -36,8 +36,11 @@ num.reviews <- ggplot(data = target.listings) +
 
 plot(num.reviews)
 
+# exports a csv with 80+ ratings for other scripts
+write.csv(target.listings, file = "80ratinglistings.csv")
 
 # descriptive Statistics
+
 # accomdates, bathrooms, bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
 
 # gets the min number of accommodates for listings 80 rating and up
