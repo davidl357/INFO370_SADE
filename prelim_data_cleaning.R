@@ -10,60 +10,6 @@ listings <- select(listings.data, id, name, summary, space, description, neighbo
 # gets only the listings that have a rating of 80 or above
 target.listings <- filter(listings, listings$review_scores_rating >= "80")
 
-# graph of ratings among the listings above 80 rating
-rating.graph <- ggplot(data = target.listings) + 
-                      geom_bar(mapping = aes(x = review_scores_rating, color = "black", fill = "blue")) +
-                      ggtitle("Total Number of Reviews Above 80") +
-                      labs(x = "Review Scores", y = "Count") +
-                      theme(legend.position = "none")
-
-plot(rating.graph)
-
-# graph of cleaniness among the listings above 80 rating
-cleanliness <- ggplot(data = target.listings) +
-                      geom_bar(mapping = aes(x = review_scores_cleanliness, color = "black", fill = "blue")) +
-                      ggtitle("Cleanliness Rating based on Reviews for Listings Rated 80 or Above") +
-                      labs(x = "Cleaniless Score (out of 10)") +
-                      theme(legend.position = "none")
-
-plot(cleanliness)
-
-# graph of the correlation between listing score and number of reviews
-num.reviews <- ggplot(data = target.listings) +
-                      geom_point(mapping = aes(y = review_scores_rating, x = number_of_reviews, color = review_scores_rating)) +
-                      ggtitle("Number of Reviews to Review Rating for Ratings 80 and Up") +
-                      labs(y = "Listing Rating", x  = "Number of Reviews")
-
-plot(num.reviews)
-
 # exports a csv with 80+ ratings for other scripts
 write.csv(target.listings, file = "80ratinglistings.csv")
-
-# descriptive Statistics
-
-# accomdates, bathrooms, bedrooms, beds, price, security deposit, cleaning fee, num reviews, review ratings, cleaninless, checkin, communication, location, value, cancellation policy
-
-# gets the min number of accommodates for listings 80 rating and up
-accomdates.min <- min(na.omit(target.listings$accommodates))
-
-# gets the maximum number of accommodates for listings 80 rating and up
-accomdates.max <- max(na.omit(target.listings$accommodates))
-
-# average number of accommodates for listings 80 rating and up
-accomdates.mean <- round(mean(na.omit(target.listings$accommodates)), 2)
-
-# median number of accommodates for listings 80 rating and up
-accomdates.median <- median(na.omit(target.listings$accommodates))
-
-# gets the minimum rating for all listings
-ratings.min <- min(na.omit(listings$review_scores_rating))
-
-# gets the maximum rating for all listings
-ratings.max <- max(na.omit(listings$review_scores_rating))
-
-# average rating for all listings
-ratings.mean <- round(mean(na.omit(listings$review_scores_rating)), 2)
-
-# median for all listings
-ratings.median <- median(na.omit(listings$review_scores_rating))
 
