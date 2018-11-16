@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2)
 
-target.listings <- read.csv('./data/80ratinglistings.csv', stringsAsFactors = FALSE)
+target.listings <- read.csv('../data/clean_listings_data.csv', stringsAsFactors = FALSE)
 
 # graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
@@ -16,7 +16,7 @@ plot(rating.graph)
 cleanliness <- ggplot(data = target.listings) +
   geom_bar(mapping = aes(x = review_scores_cleanliness, color = "black", fill = "blue")) +
   ggtitle("Cleanliness Rating based on Reviews for Listings Rated 80 or Above") +
-  labs(x = "Cleaniless Score (out of 10)") +
+  labs(x = "Cleanliness Score (out of 10)") +
   theme(legend.position = "none")
 
 plot(cleanliness)
@@ -30,11 +30,15 @@ num.reviews <- ggplot(data = target.listings) +
 plot(num.reviews)
 
 
-# density plot of cleanliness score
+# density plot of number of reviews score
 d <- density(na.omit(target.listings$number_of_reviews))
-plot(d, main = "Density Plot of Cleanliness")
+plot(d, main = "Density Plot of Cleanliness", xlab = "Number of Reviews")
 polygon(d, col="red", border="black")
 
+# density plot of price
+e <- density(na.omit(target.listings$price))
+plot(e, main = "Density Plot of Price", xlab = "Price")
+polygon(e, col="red", border="black")
 
 # linear regression rating vs. price
 # linear regression rating vs. location
