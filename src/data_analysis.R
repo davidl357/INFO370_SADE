@@ -29,6 +29,13 @@ num.reviews <- ggplot(data = target.listings) +
 
 plot(num.reviews)
 
+
+# density plot of cleanliness score
+d <- density(na.omit(target.listings$number_of_reviews))
+plot(d, main = "Density Plot of Cleanliness")
+polygon(d, col="red", border="black")
+
+
 # linear regression rating vs. price
 # linear regression rating vs. location
 
