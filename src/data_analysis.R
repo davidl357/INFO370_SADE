@@ -32,7 +32,7 @@ plot(num.reviews)
 
 # density plot of number of reviews score
 d <- density(na.omit(target.listings$number_of_reviews))
-plot(d, main = "Density Plot of Cleanliness", xlab = "Number of Reviews")
+plot(d, main = "Density Plot of Number of Reviews", xlab = "Number of Reviews")
 polygon(d, col="red", border="black")
 
 # density plot of price
