@@ -1,7 +1,8 @@
 library(dplyr)
 library(ggplot2)
 
-target.listings <- read.csv('../data/clean_listings_data.csv', stringsAsFactors = FALSE)
+target.listings <- read.csv('../data/target_clean_listings.csv', stringsAsFactors = FALSE)
+all.listings <- read.csv('../data/clean_listings.csv', stringsAsFactors = FALSE)
 
 # graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
@@ -32,6 +33,7 @@ plot(num.reviews)
 
 # density plot of number of reviews score
 d <- density(na.omit(target.listings$number_of_reviews))
+par(mfrow=c(1,2))
 plot(d, main = "Density Plot of Cleanliness", xlab = "Number of Reviews")
 polygon(d, col="red", border="black")
 
@@ -41,5 +43,8 @@ plot(e, main = "Density Plot of Price", xlab = "Price")
 polygon(e, col="red", border="black")
 
 # linear regression rating vs. price
+priceLM <- lm(review_scores_rating ~ number_of_reviews, data=all.listings)
+plot(x=all.listings$number_of_reviews, y=all.listings$review_scores_rating, xlab="Price", ylab="Review Score", main="")
+abline(priceLM, col="red")
 # linear regression rating vs. location
-
+reviewCountLM
