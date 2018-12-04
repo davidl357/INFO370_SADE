@@ -30,10 +30,10 @@ num.reviews <- ggplot(data = target.listings) +
 
 plot(num.reviews)
 
+par(mfrow=c(1,2))
 
 # density plot of number of reviews score
 d <- density(na.omit(target.listings$number_of_reviews))
-
 plot(d, main = "Density Plot of Number of Reviews", xlab = "Number of Reviews")
 polygon(d, col="red", border="black")
 
@@ -48,3 +48,4 @@ plot(x=all.listings$number_of_reviews, y=all.listings$review_scores_rating, xlab
 abline(priceLM, col="red")
 # linear regression rating vs. location
 reviewCountLM
+
