@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(corrplot)
 
 target.listings <- read.csv('../data/target_clean_listings.csv', stringsAsFactors = FALSE)
 all.listings <- read.csv('../data/clean_listings.csv', stringsAsFactors = FALSE)
@@ -57,4 +58,11 @@ plot(x=all.listings$number_of_reviews, y=all.listings$review_scores_rating, xlab
 abline(priceLM, col="red")
 # linear regression rating vs. location
 reviewCountLM
+
+#correlation plot using variables from forward selection
+corrplot(cor(select(target.listings, Shampoo, FireExtinguisher, Petsliveonthisproperty, SafetyCard, TV,
+                    FreeParkingonPremises, accommodates, price, CarbonMonoxideDetector, bathrooms,
+                    AirConditioning, HotTub, LaptopFriendlyWorkspace, Internet, WirelessInternet, 
+                    SuitableforEvents, IndoorFireplace, number_of_reviews, PetsAllowed, 
+                    Washer.Dryer), use = "complete.obs"), na.label = "o")
 
