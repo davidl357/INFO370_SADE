@@ -1,8 +1,18 @@
 library(dplyr)
 library(ggplot2)
+library(corrplot)
 
 target.listings <- read.csv('../data/target_clean_listings.csv', stringsAsFactors = FALSE)
 all.listings <- read.csv('../data/clean_listings.csv', stringsAsFactors = FALSE)
+listings <- read.csv('../data/listings.csv', stringsAsFactors = FALSE)
+
+# graphs of ratings among all listings
+all.listings <- ggplot(data = listings) +
+  geom_bar(mapping = aes(x = review_scores_rating)) +
+  ggtitle("Distribution of Reviews Among All Listings") +
+  labs(x = "Review Scores", y = "Frequency")
+
+plot(all.listings)
 
 # graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
@@ -30,10 +40,10 @@ num.reviews <- ggplot(data = target.listings) +
 
 plot(num.reviews)
 
+par(mfrow=c(1,2))
 
 # density plot of number of reviews score
 d <- density(na.omit(target.listings$number_of_reviews))
-
 plot(d, main = "Density Plot of Number of Reviews", xlab = "Number of Reviews")
 polygon(d, col="red", border="black")
 
@@ -48,3 +58,11 @@ plot(x=all.listings$number_of_reviews, y=all.listings$review_scores_rating, xlab
 abline(priceLM, col="red")
 # linear regression rating vs. location
 reviewCountLM
+
+#correlation plot using variables from forward selection
+corrplot(cor(select(target.listings, Shampoo, FireExtinguisher, Petsliveonthisproperty, SafetyCard, TV,
+                    FreeParkingonPremises, accommodates, price, CarbonMonoxideDetector, bathrooms,
+                    AirConditioning, HotTub, LaptopFriendlyWorkspace, Internet, WirelessInternet, 
+                    SuitableforEvents, IndoorFireplace, number_of_reviews, PetsAllowed, 
+                    Washer.Dryer), use = "complete.obs"), na.label = "o")
+
