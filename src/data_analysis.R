@@ -3,6 +3,15 @@ library(ggplot2)
 
 target.listings <- read.csv('../data/target_clean_listings.csv', stringsAsFactors = FALSE)
 all.listings <- read.csv('../data/clean_listings.csv', stringsAsFactors = FALSE)
+listings <- read.csv('../data/listings.csv', stringsAsFactors = FALSE)
+
+# graphs of ratings among all listings
+all.listings <- ggplot(data = listings) +
+  geom_bar(mapping = aes(x = review_scores_rating)) +
+  ggtitle("Distribution of Reviews Among All Listings") +
+  labs(x = "Review Scores", y = "Frequency")
+
+plot(all.listings)
 
 # graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
