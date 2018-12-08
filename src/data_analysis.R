@@ -6,6 +6,13 @@ target.listings <- read.csv('../data/target_clean_listings.csv', stringsAsFactor
 all.listings <- read.csv('../data/clean_listings.csv', stringsAsFactors = FALSE)
 listings <- read.csv('../data/listings.csv', stringsAsFactors = FALSE)
 
+
+# function to calculate the mode of data
+mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
 # graphs of ratings among all listings
 all.listings <- ggplot(data = listings) +
   geom_bar(mapping = aes(x = review_scores_rating)) +
@@ -13,6 +20,9 @@ all.listings <- ggplot(data = listings) +
   labs(x = "Review Scores", y = "Frequency")
 
 plot(all.listings)
+
+mean.target.listings <- mean(target.listings$review_scores_rating)
+mode.target.listings <- mode(target.listings$review_scores_rating)
 
 # graph of ratings among the listings above 80 rating
 rating.graph <- ggplot(data = target.listings) + 
